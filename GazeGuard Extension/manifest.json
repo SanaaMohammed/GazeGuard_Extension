@@ -1,0 +1,35 @@
+{
+    "manifest_version": 2,
+    "name":"GazeGuard",
+    "short_name":"GazeGuard",
+    "version":"2.5.6",
+    "description": "hides people's photos to prevent them from seeing unauthorized photos in a way that minimizes the impact on the user's browsing experience while preserving the page layout.",
+    "icons":{"16":"img/icon16.png","48": "img/icon48.png","128": "img/icon128.png" },
+    "browser_action": {
+        "default_icon": "img/icon-d.png",
+        "default_title": "Overlay Images",
+        "default_popup": "popup.htm"
+    }, "background": {
+        "scripts": ["background.js"]
+    }, "options_page": "options.htm",
+    "content_scripts": [{
+        "matches": ["<all_urls>"],
+        "js":["onnxruntime-web-1.16.3/package/dist/ort.min.js",
+        "js/opencv.js",
+        "js/Yolo5.js",
+        "js/Yolo8.js",
+        "js/Edit.js",
+        "js/start.js"],
+        "run_at":"document_start",
+        "all_frames": true
+    }],
+    "permissions": ["tabs", "storage"],
+    "web_accessible_resources": ["ort-wasm-simd.wasm",
+    "model/mask-yolov5-seg.onnx",
+    "model/nms-yolov5.onnx",
+    "model/yolov5n-seg.onnx",
+    "model/yolov8n-seg.onnx",
+    "model/nms-yolov8.onnx",
+    "model/mask-yolov8-seg.onnx",
+    "img/Animate.gif","img/pattern.png", "img/pattern-light.png", "img/eye.png", "img/undo.png"]
+}
